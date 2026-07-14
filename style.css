@@ -36,3 +36,10 @@ form {
     align-items: center; /* now works because form is flex */
     margin-top: 50px;
 }
+p{
+    color:black;
+    font-style: italic;
+    font-size: large;
+    text-align: center;
+    text-align:calc();
+}

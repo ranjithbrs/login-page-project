@@ -18,6 +18,7 @@ function login() {
         return false;
     } 
     else if (users[Username] && users[Username] === Password) {
+        window.location.href="welcome.html"
         alert("Login successfully");
         return false;
     } 
