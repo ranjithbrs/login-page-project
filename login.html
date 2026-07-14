@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <h2>Login Page</h2>
+  <form onsubmit="return login()">
+    <label for="Username">Username:</label>
+    <input type="text" name="Username" id="Username" placeholder="Username"><br>
+
+    <label for="Password">Password:</label>
+    <input type="Password" name="Password" id="Password" placeholder="Password"><br>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <!-- Message area for feedback -->
+  <p id="message" style="text-align:center; color:red;"></p>
+</body>
+</html>
