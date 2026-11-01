@@ -1,19 +1,78 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        <title>Welcome Page</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script>
-    </head>
-    <body>
-        <h2>Welcome to this page!</h2><br>
-        <p>This login page is designed to let users enter their username and password 
-            before accessing the site. It checks whether the fields are filled correctly 
-            and then redirects to the home page with a personalized welcome message. 
-            The goal is to practice JavaScript validation and page navigation while 
-            learning how data flows between different web pages.
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Welcome dashboard view for the Frontend Login Page Project.">
+  <title>Welcome Dashboard — Login Page Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page-wrapper">
+    <section class="login-card welcome-card" aria-labelledby="welcome-heading">
+      <header class="welcome-header">
+        <span class="badge-auth">✓ Client Authenticated (Prototype)</span>
+        <h1 id="welcome-heading">Welcome, <span id="userNameDisplay">Explorer</span>! 👋</h1>
+        <p class="subtitle">Session verified via client-side state passing</p>
+      </header>
+
+      <div class="welcome-body">
+        <p>
+          You have successfully logged into the practice application gateway. This destination view verifies 
+          page-to-page navigation and demonstrates how data (such as username and login timestamp) can be passed 
+          between separate HTML documents using <code>sessionStorage</code> and URL query parameters.
         </p>
-    </body>
+
+        <div class="info-panel">
+          <h3>💡 What this prototype demonstrated:</h3>
+          <p>
+            • <strong>Form Validation:</strong> Intercepted the <code>submit</code> event to block empty or invalid inputs.<br>
+            • <strong>State Hand-off:</strong> Preserved user identity in the browser without requiring a backend session.<br>
+            • <strong>Accessibility &amp; UX:</strong> Inline error messaging, high-contrast inputs, and mobile responsiveness.
+          </p>
+        </div>
+
+        <div class="security-disclaimer" style="margin-top: 15px; margin-bottom: 20px;">
+          🔒 <strong>Production Contrast:</strong> In a production full-stack application (like Spring Boot or React + Supabase), 
+          this view would be guarded by a signed JWT or session cookie validated against a secure database backend.
+        </div>
+
+        <a href="index.html" class="btn-secondary" id="logoutBtn" role="button">← Log Out &amp; Return to Login</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Check SessionStorage first, fallback to URL parameter
+      let user = null;
+      try {
+        user = sessionStorage.getItem("loggedInUser");
+      } catch (e) {
+        console.warn("Session storage access error:", e);
+      }
+
+      if (!user) {
+        const urlParams = new URLSearchParams(window.location.search);
+        user = urlParams.get("user");
+      }
+
+      const displayElem = document.getElementById("userNameDisplay");
+      if (displayElem && user) {
+        displayElem.textContent = user;
+      }
+
+      // Logout handler
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          try {
+            sessionStorage.removeItem("loggedInUser");
+            sessionStorage.removeItem("loginTimestamp");
+          } catch (e) {}
+        });
+      }
+    });
+  </script>
+</body>
 </html>

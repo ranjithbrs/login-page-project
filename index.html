@@ -3,20 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
+  <meta name="description" content="Frontend login interface demonstrating responsive design, accessible form validation, and page navigation.">
+  <title>Login Portal — Frontend Practice Prototype</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
 </head>
 <body>
-  <h2>Login Page</h2>
-  <form onsubmit="return login()">
-    <label for="Username">Username:</label>
-    <input type="text" name="Username" id="Username" placeholder="Username"><br>
+  <main class="page-wrapper">
+    <section class="login-card" aria-labelledby="form-heading">
+      <header class="card-header">
+        <div class="lock-icon" aria-hidden="true">🔐</div>
+        <h1 id="form-heading">Sign In</h1>
+        <p class="subtitle">Frontend validation &amp; responsive UI prototype</p>
+      </header>
 
-    <label for="Password">Password:</label>
-    <input type="Password" name="Password" id="Password" placeholder="Password"><br>
+      <!-- Accessible Alert Message Box -->
+      <div id="messageBox" class="message-box" role="alert" aria-live="polite" hidden></div>
 
-    <button type="submit">Login</button>
-  </form>
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            placeholder="e.g. Ranjith" 
+            autocomplete="username" 
+            required 
+            aria-required="true"
+          >
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="password">Password</label>
+            <button type="button" id="togglePasswordBtn" class="toggle-btn" aria-label="Show password">Show</button>
+          </div>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Enter password" 
+            autocomplete="current-password" 
+            required 
+            aria-required="true"
+          >
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-primary">Sign In</button>
+      </form>
+
+      <!-- Educational Notice & Demo Accounts -->
+      <aside class="demo-box" aria-label="Demo credentials">
+        <p class="demo-title">💡 <strong>Practice Demo Credentials</strong></p>
+        <p class="demo-subtitle">Select any pre-configured test account:</p>
+        <div class="demo-tags">
+          <button type="button" class="demo-chip" onclick="fillCredentials('Ranjith', '1234')">Ranjith / 1234</button>
+          <button type="button" class="demo-chip" onclick="fillCredentials('Arun', 'abcd')">Arun / abcd</button>
+          <button type="button" class="demo-chip" onclick="fillCredentials('Priya', 'pass123')">Priya / pass123</button>
+          <button type="button" class="demo-chip" onclick="fillCredentials('Kumar', '9876')">Kumar / 9876</button>
+        </div>
+        <p class="security-disclaimer">
+          ⚠️ <em>Educational prototype: In production systems, credentials are never validated in client-side JavaScript. Authentication requires backend encryption, BCrypt hashing, and HTTPS.</em>
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
